@@ -15,10 +15,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.androiddevchallenge.ui.theme.MyTheme
 
 @Composable
-fun WelcomeScreen() {
+fun WelcomeScreen(navController: NavController) {
     Surface(
         Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background
@@ -53,7 +55,7 @@ fun WelcomeScreen() {
                 }
                 Spacer(Modifier.height(8.dp))
                 Button(
-                    onClick = { },
+                    onClick = { navController.navigate("login") },
                     colors = ButtonDefaults.buttonColors(
                         backgroundColor = MaterialTheme.colors.secondary,
                     ),
@@ -74,6 +76,6 @@ fun WelcomeScreen() {
 @Composable
 fun WelcomeScreenPreview() {
     MyTheme {
-        WelcomeScreen()
+        WelcomeScreen(navController = rememberNavController())
     }
 }

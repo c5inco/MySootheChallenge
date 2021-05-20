@@ -5,7 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -18,6 +18,9 @@ import com.example.androiddevchallenge.ui.theme.MyTheme
 
 @Composable
 fun LoginScreen() {
+    var emailAddress by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+
     Surface(
         Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background
@@ -42,8 +45,8 @@ fun LoginScreen() {
                     modifier = Modifier.paddingFromBaseline(bottom = 32.dp)
                 )
                 TextField(
-                    value = "",
-                    onValueChange = {},
+                    value = emailAddress,
+                    onValueChange = { emailAddress = it },
                     placeholder = { Text("Email address") },
                     colors = TextFieldDefaults.textFieldColors(
                         backgroundColor = MaterialTheme.colors.surface
@@ -54,8 +57,8 @@ fun LoginScreen() {
                 )
                 Spacer(Modifier.height(8.dp))
                 TextField(
-                    value = "",
-                    onValueChange = {},
+                    value = password,
+                    onValueChange = { password = it },
                     placeholder = { Text("Password") },
                     colors = TextFieldDefaults.textFieldColors(
                         backgroundColor = MaterialTheme.colors.surface
