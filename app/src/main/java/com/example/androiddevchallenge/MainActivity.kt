@@ -15,13 +15,13 @@
  */
 package com.example.androiddevchallenge
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.androiddevchallenge.ui.theme.MyTheme
@@ -49,26 +49,39 @@ fun MyApp() {
 
     Surface(color = MaterialTheme.colors.background) {
         AnimatedNavHost(navController = navController, startDestination = "welcome") {
-            composable("welcome") { WelcomeScreen(navController) }
-            composable("login") { LoginScreen() }
+            composable("welcome",
+                exitTransition = { _, _ ->
+                    SharedZAxisVariantExitTransition()
+                },
+                popEnterTransition = { _, _ ->
+                    SharedZAxisVariantEnterTransition()
+                }
+            ) {
+                WelcomeScreen {
+                    navController.navigate("login")
+                }
+            }
+            composable(
+                "login",
+                enterTransition = { _, _ ->
+                    SharedZAxisVariantEnterTransition()
+                },
+                exitTransition = { _, _ ->
+                    SharedZAxisVariantExitTransition()
+                }
+            ) {
+                LoginScreen()
+            }
         }
     }
 }
 
 @ExperimentalAnimationApi
 @Preview("Light Theme", widthDp = 360, heightDp = 640)
+@Preview("Dark Theme", widthDp = 360, heightDp = 640, uiMode = UI_MODE_NIGHT_YES)
 @Composable
-fun LightPreview() {
+fun AppPreview() {
     MyTheme {
-        MyApp()
-    }
-}
-
-@ExperimentalAnimationApi
-@Preview("Dark Theme", widthDp = 360, heightDp = 640)
-@Composable
-fun DarkPreview() {
-    MyTheme(darkTheme = true) {
-        MyApp()
+        WelcomeScreen()
     }
 }
