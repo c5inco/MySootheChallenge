@@ -13,30 +13,26 @@ import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.ui.theme.MyTheme
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(
+    onBack: () -> Unit = {},
+    onNext: () -> Unit = {}
+) {
     var emailAddress by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
-    Surface(
-        Modifier.fillMaxSize(),
-        color = MaterialTheme.colors.background
-    ) {
-        Box(Modifier.fillMaxSize()) {
-            //Image(
-            //    painter = painterResource(id = R.drawable.login),
-            //    contentDescription = null,
-            //    contentScale = ContentScale.FillBounds,
-            //    modifier = Modifier.fillMaxSize()
-            //)
+    Box(Modifier.fillMaxSize()) {
+        Column(
+            Modifier
+                .fillMaxSize()
+                .padding(horizontal = 16.dp),
+        ) {
             Column(
-                Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = 16.dp),
+                Modifier.weight(1f),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    "Log in".toUpperCase(),
+                    "Log in".uppercase(),
                     style = MaterialTheme.typography.h1,
                     modifier = Modifier.paddingFromBaseline(bottom = 32.dp)
                 )
@@ -64,15 +60,6 @@ fun LoginScreen() {
                         .height(56.dp)
                 )
                 Spacer(Modifier.height(8.dp))
-                Button(
-                    onClick = { },
-                    modifier = Modifier
-                        .height(72.dp)
-                        .fillMaxWidth(),
-                    shape = MaterialTheme.shapes.medium
-                ) {
-                    Text("Log in".toUpperCase())
-                }
                 Row(
                     modifier = Modifier.paddingFromBaseline(top = 32.dp)
                 ) {
@@ -85,6 +72,25 @@ fun LoginScreen() {
                     )
                 }
             }
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 16.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                TextButton(
+                    onClick = { onBack() },
+                    shape = MaterialTheme.shapes.medium
+                ) {
+                    Text("Back".uppercase())
+                }
+                Button(
+                    onClick = { onNext() },
+                    shape = MaterialTheme.shapes.medium
+                ) {
+                    Text("Login".uppercase())
+                }
+            }
         }
     }
 }
@@ -94,6 +100,8 @@ fun LoginScreen() {
 @Composable
 fun LoginScreenPreview() {
     MyTheme {
-        LoginScreen()
+        Surface(color = MaterialTheme.colors.background) {
+            LoginScreen()
+        }
     }
 }

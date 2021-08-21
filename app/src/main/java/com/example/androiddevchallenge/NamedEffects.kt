@@ -61,7 +61,7 @@ fun SharedZAxisVariantEnterTransition(): EnterTransition {
 }
 
 @ExperimentalAnimationApi
-fun SharedAxisZExitTransition(): ExitTransition {
+fun SharedZAxisExitTransition(): ExitTransition {
     return fadeOut(animationSpec = tween(90, easing = FastOutLinearInEasing)) +
             scaleOut(
                 targetScale = 1.1f,

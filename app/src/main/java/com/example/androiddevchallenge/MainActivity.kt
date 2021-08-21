@@ -51,10 +51,10 @@ fun MyApp() {
         AnimatedNavHost(navController = navController, startDestination = "welcome") {
             composable("welcome",
                 exitTransition = { _, _ ->
-                    SharedZAxisVariantExitTransition()
+                    SharedZAxisExitTransition()
                 },
                 popEnterTransition = { _, _ ->
-                    SharedZAxisVariantEnterTransition()
+                    SharedZAxisEnterTransition()
                 }
             ) {
                 WelcomeScreen {
@@ -64,13 +64,35 @@ fun MyApp() {
             composable(
                 "login",
                 enterTransition = { _, _ ->
-                    SharedZAxisVariantEnterTransition()
+                    SharedZAxisEnterTransition()
+                },
+                popEnterTransition = { _, _ ->
+                    SharedXAxisEnterTransition()
                 },
                 exitTransition = { _, _ ->
-                    SharedZAxisVariantExitTransition()
+                    SharedXAxisExitTransition()
+                },
+                popExitTransition = { _, _ ->
+                    SharedZAxisExitTransition()
+                },
+            ) {
+                LoginScreen(
+                    onBack = { navController.popBackStack() },
+                    onNext = { navController.navigate("interests")}
+                )
+            }
+            composable(
+                "interests",
+                enterTransition = { _, _ ->
+                    SharedXAxisEnterTransition()
+                },
+                exitTransition = { _, _ ->
+                    SharedXAxisExitTransition()
                 }
             ) {
-                LoginScreen()
+                InterestsScreen {
+                    navController.popBackStack()
+                }
             }
         }
     }
