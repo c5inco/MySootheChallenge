@@ -14,6 +14,7 @@ import com.example.androiddevchallenge.ui.theme.MyTheme
 @Composable
 fun InterestsScreen(
     onBack: () -> Unit = {},
+    onNext: () -> Unit = {}
 ) {
     Box(Modifier.fillMaxSize()) {
         Column(
@@ -72,7 +73,7 @@ fun InterestsScreen(
                     Text("Back".uppercase())
                 }
                 Button(
-                    onClick = { },
+                    onClick = { onNext() },
                     shape = MaterialTheme.shapes.medium
                 ) {
                     Text("Get started".uppercase())

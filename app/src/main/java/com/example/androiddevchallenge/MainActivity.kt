@@ -86,13 +86,28 @@ fun MyApp() {
                 enterTransition = { _, _ ->
                     SharedXAxisEnterTransition()
                 },
+                popEnterTransition = { _, _ ->
+                    SharedYAxisEnterTransition()
+                },
                 exitTransition = { _, _ ->
                     SharedXAxisExitTransition()
                 }
             ) {
-                InterestsScreen {
-                    navController.popBackStack()
+                InterestsScreen(
+                    onBack = { navController.popBackStack() },
+                    onNext = { navController.navigate("home") }
+                )
+            }
+            composable(
+                "home",
+                enterTransition = { _, _ ->
+                    SharedYAxisEnterTransition()
+                },
+                exitTransition =  { _, _ ->
+                    SharedYAxisExitTransition()
                 }
+            ) {
+                HomeScreen()
             }
         }
     }
