@@ -24,7 +24,9 @@ import com.example.androiddevchallenge.ui.components.CollectionCard
 import com.example.androiddevchallenge.ui.theme.MyTheme
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    onOpenImage: (title: String, imageId: Int) -> Unit = { _, _ -> }
+) {
     Scaffold(
         bottomBar = {
             BottomNavigation(
@@ -125,20 +127,26 @@ fun HomeScreen() {
                             horizontalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
                             for (i in 0..2) {
+                                val (title, imageId) = SampleCollectionItems[i]
                                 CollectionCard(
-                                    title = SampleCollectionItems[i].title,
-                                    imageId = SampleCollectionItems[i].imageId
-                                )
+                                    title = title,
+                                    imageId = imageId
+                                ) {
+                                    onOpenImage(title, imageId)
+                                }
                             }
                         }
                         Row(
                             horizontalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
                             for (j in 3..5) {
+                                val (title, imageId) = SampleCollectionItems[j]
                                 CollectionCard(
-                                    title = SampleCollectionItems[j].title,
-                                    imageId = SampleCollectionItems[j].imageId
-                                )
+                                    title = title,
+                                    imageId = imageId
+                                ) {
+                                    onOpenImage(title, imageId)
+                                }
                             }
                         }
                     }
@@ -159,7 +167,9 @@ fun HomeScreen() {
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 items(SampleAlignBodyItems) {
-                    AlignCircleItem(title = it.title, imageId = it.imageId)
+                    AlignCircleItem(title = it.title, imageId = it.imageId) {
+                        onOpenImage(it.title, it.imageId)
+                    }
                 }
             }
 
@@ -176,7 +186,9 @@ fun HomeScreen() {
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 items(SampleAlignMindItems) {
-                    AlignCircleItem(title = it.title, imageId = it.imageId)
+                    AlignCircleItem(title = it.title, imageId = it.imageId) {
+                        onOpenImage(it.title, it.imageId)
+                    }
                 }
             }
         }

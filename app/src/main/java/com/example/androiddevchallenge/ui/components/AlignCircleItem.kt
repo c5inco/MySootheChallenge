@@ -2,6 +2,7 @@ package com.example.androiddevchallenge.ui.components
 
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.size
@@ -23,9 +24,11 @@ import com.example.androiddevchallenge.ui.theme.MyTheme
 @Composable
 fun AlignCircleItem(
     title: String,
-    imageId: Int
+    imageId: Int,
+    onOpen: () -> Unit = {}
 ) {
     Column(
+        Modifier.clickable { onOpen() },
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(

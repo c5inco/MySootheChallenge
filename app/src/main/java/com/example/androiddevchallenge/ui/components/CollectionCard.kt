@@ -3,6 +3,7 @@ package com.example.androiddevchallenge.ui.components
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
@@ -22,13 +23,15 @@ import com.example.androiddevchallenge.ui.theme.MyTheme
 @Composable
 fun CollectionCard(
     title: String,
-    imageId: Int
+    imageId: Int,
+    onOpen: () -> Unit = {}
 ) {
     Row(
         Modifier
             .width(192.dp)
             .clip(RoundedCornerShape(2.dp))
-            .background(color = MaterialTheme.colors.surface),
+            .background(color = MaterialTheme.colors.surface)
+            .clickable { onOpen() },
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(

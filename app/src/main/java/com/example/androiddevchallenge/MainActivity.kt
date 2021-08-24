@@ -24,6 +24,8 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavType
+import androidx.navigation.compose.navArgument
 import com.example.androiddevchallenge.ui.theme.MyTheme
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
@@ -103,11 +105,37 @@ fun MyApp() {
                 enterTransition = { _, _ ->
                     SharedYAxisEnterTransition()
                 },
+                popEnterTransition = { _, _ ->
+                    SharedZAxisEnterTransition()
+                },
                 exitTransition =  { _, _ ->
                     SharedYAxisExitTransition()
                 }
             ) {
-                HomeScreen()
+                HomeScreen { title, imageId ->
+                    navController.navigate("image/$title/$imageId")
+                }
+            }
+            composable(
+                "image/{title}/{imageId}",
+                arguments = listOf(
+                    navArgument("title") { type = NavType.StringType },
+                    navArgument("imageId") { type = NavType.IntType}
+                ),
+                enterTransition = { _, _ ->
+                    SharedZAxisEnterTransition()
+                },
+                exitTransition =  { _, _ ->
+                    SharedZAxisExitTransition()
+                }
+            ) { backStackEntry ->
+                ImageScreen(
+                    title = backStackEntry.arguments?.getString("title")!!,
+                    imageId = backStackEntry.arguments?.getInt("imageId")!!,
+                    onDismiss = {
+                        navController.popBackStack()
+                    }
+                )
             }
         }
     }
