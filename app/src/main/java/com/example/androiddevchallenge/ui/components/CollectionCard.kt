@@ -33,13 +33,14 @@ fun CollectionCard(
         Image(
             painterResource(id = imageId),
             contentDescription = "Image for $title",
-            contentScale = ContentScale.FillWidth,
+            contentScale = ContentScale.Crop,
             modifier = Modifier.size(56.dp)
         )
         Spacer(Modifier.width(16.dp))
         Text(
             title,
-            style = MaterialTheme.typography.h3
+            style = MaterialTheme.typography.h3,
+            modifier = Modifier.padding(end = 8.dp)
         )
     }
 }
