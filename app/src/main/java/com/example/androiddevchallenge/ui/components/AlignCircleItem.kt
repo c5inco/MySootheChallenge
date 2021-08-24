@@ -1,5 +1,6 @@
 package com.example.androiddevchallenge.ui.components
 
+import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.paddingFromBaseline
@@ -43,7 +44,8 @@ fun AlignCircleItem(
     }
 }
 
-@Preview
+@Preview(name = "Light")
+@Preview(name = "Dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun AlignCircleItemPreview() {
     MyTheme {

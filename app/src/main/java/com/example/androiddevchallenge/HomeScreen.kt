@@ -1,5 +1,6 @@
 package com.example.androiddevchallenge
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
@@ -182,7 +183,8 @@ fun HomeScreen() {
     }
 }
 
-@Preview
+@Preview(name = "Light", widthDp = 360, heightDp = 640)
+@Preview(name = "Dark", widthDp = 360, heightDp = 640, uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun HomeScreenPreview() {
     MyTheme {

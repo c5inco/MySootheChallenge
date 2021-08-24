@@ -97,8 +97,8 @@ fun LoginScreen(
     }
 }
 
-@Preview(name = "Login screen", device = Devices.PIXEL_4)
-@Preview(name = "Login screen (dark)", device = Devices.PIXEL_4, uiMode = UI_MODE_NIGHT_YES)
+@Preview(name = "Light", device = Devices.PIXEL_4)
+@Preview(name = "Dark", device = Devices.PIXEL_4, uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun LoginScreenPreview() {
     MyTheme {

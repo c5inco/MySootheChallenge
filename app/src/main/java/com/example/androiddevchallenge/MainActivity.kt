@@ -99,8 +99,8 @@ fun MyApp() {
 }
 
 @ExperimentalAnimationApi
-@Preview("Light Theme", widthDp = 360, heightDp = 640)
-@Preview("Dark Theme", widthDp = 360, heightDp = 640, uiMode = UI_MODE_NIGHT_YES)
+@Preview("Light", widthDp = 360, heightDp = 640)
+@Preview("Dark", widthDp = 360, heightDp = 640, uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun AppPreview() {
     MyTheme {

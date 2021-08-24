@@ -1,5 +1,6 @@
 package com.example.androiddevchallenge
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -81,7 +82,8 @@ fun InterestsScreen(
     }
 }
 
-@Preview
+@Preview(name = "Light")
+@Preview(name = "Dark", uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun InterestsPreview() {
     MyTheme {

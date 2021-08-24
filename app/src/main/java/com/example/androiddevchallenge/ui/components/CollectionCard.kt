@@ -1,5 +1,6 @@
 package com.example.androiddevchallenge.ui.components
 
+import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -45,7 +46,8 @@ fun CollectionCard(
     }
 }
 
-@Preview
+@Preview(name = "Light")
+@Preview(name = "Dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun CollectionCardPreview() {
     MyTheme {

@@ -67,8 +67,8 @@ fun WelcomeScreen(
     }
 }
 
-@Preview(name = "Welcome screen", device = Devices.PIXEL_4)
-@Preview(name = "Welcome screen (dark)", device = Devices.PIXEL_4, uiMode = UI_MODE_NIGHT_YES)
+@Preview(name = "Light", device = Devices.PIXEL_4)
+@Preview(name = "Dark", device = Devices.PIXEL_4, uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun WelcomeScreenPreview() {
     MyTheme {
