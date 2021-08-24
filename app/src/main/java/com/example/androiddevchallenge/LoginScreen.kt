@@ -43,6 +43,7 @@ fun LoginScreen(
                     colors = TextFieldDefaults.textFieldColors(
                         backgroundColor = MaterialTheme.colors.surface
                     ),
+                    singleLine = true,
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(56.dp)
@@ -55,6 +56,7 @@ fun LoginScreen(
                     colors = TextFieldDefaults.textFieldColors(
                         backgroundColor = MaterialTheme.colors.surface
                     ),
+                    singleLine = true,
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(56.dp)
