@@ -106,92 +106,96 @@ fun HomeScreen(
                     .padding(horizontal = 16.dp)
                     .fillMaxWidth()
             )
-            Text(
-                "Favorite collections".uppercase(),
-                style = MaterialTheme.typography.h2,
-                modifier = Modifier
-                    .paddingFromBaseline(top = 40.dp, bottom = 8.dp)
-                    .padding(start = 16.dp)
-            )
-            Column(
-                Modifier
-                    .fillMaxWidth()
-                    .horizontalScroll(rememberScrollState())
-            ) {
-                Row {
-                    Spacer(Modifier.width(16.dp))
-                    Column(
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            HomeScreenRow(title = "Favorite collections") {
+                Column(
+                    Modifier
+                        .fillMaxWidth()
+                        .horizontalScroll(rememberScrollState())
+                ) {
+                    Row {
+                        Spacer(Modifier.width(16.dp))
+                        Column(
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
-                            for (i in 0..2) {
-                                val (title, imageId) = SampleCollectionItems[i]
-                                CollectionCard(
-                                    title = title,
-                                    imageId = imageId
-                                ) {
-                                    onOpenImage(title, imageId)
+                            Row(
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                for (i in 0..2) {
+                                    val (title, imageId) = SampleCollectionItems[i]
+                                    CollectionCard(
+                                        title = title,
+                                        imageId = imageId
+                                    ) {
+                                        onOpenImage(title, imageId)
+                                    }
+                                }
+                            }
+                            Row(
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                for (j in 3..5) {
+                                    val (title, imageId) = SampleCollectionItems[j]
+                                    CollectionCard(
+                                        title = title,
+                                        imageId = imageId
+                                    ) {
+                                        onOpenImage(title, imageId)
+                                    }
                                 }
                             }
                         }
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(8.dp)
-                        ) {
-                            for (j in 3..5) {
-                                val (title, imageId) = SampleCollectionItems[j]
-                                CollectionCard(
-                                    title = title,
-                                    imageId = imageId
-                                ) {
-                                    onOpenImage(title, imageId)
-                                }
-                            }
-                        }
-                    }
-                    Spacer(Modifier.width(16.dp))
-                }
-            }
-
-            Text(
-                "Align your body".uppercase(),
-                style = MaterialTheme.typography.h2,
-                modifier = Modifier
-                    .paddingFromBaseline(top = 40.dp, bottom = 8.dp)
-                    .padding(start = 16.dp)
-            )
-            LazyRow(
-                Modifier.fillMaxWidth(),
-                contentPadding = PaddingValues(horizontal = 16.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                items(SampleAlignBodyItems) {
-                    AlignCircleItem(title = it.title, imageId = it.imageId) {
-                        onOpenImage(it.title, it.imageId)
+                        Spacer(Modifier.width(16.dp))
                     }
                 }
             }
 
-            Text(
-                "Align your mind".uppercase(),
-                style = MaterialTheme.typography.h2,
-                modifier = Modifier
-                    .paddingFromBaseline(top = 40.dp, bottom = 8.dp)
-                    .padding(start = 16.dp)
-            )
-            LazyRow(
-                Modifier.fillMaxWidth(),
-                contentPadding = PaddingValues(horizontal = 16.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                items(SampleAlignMindItems) {
-                    AlignCircleItem(title = it.title, imageId = it.imageId) {
-                        onOpenImage(it.title, it.imageId)
+            HomeScreenRow(title = "Align your body") {
+                LazyRow(
+                    Modifier.fillMaxWidth(),
+                    contentPadding = PaddingValues(horizontal = 16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    items(SampleAlignBodyItems) {
+                        AlignCircleItem(title = it.title, imageId = it.imageId) {
+                            onOpenImage(it.title, it.imageId)
+                        }
+                    }
+                }
+            }
+
+            HomeScreenRow(title = "Align your mind") {
+                LazyRow(
+                    Modifier.fillMaxWidth(),
+                    contentPadding = PaddingValues(horizontal = 16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    items(SampleAlignMindItems) {
+                        AlignCircleItem(title = it.title, imageId = it.imageId) {
+                            onOpenImage(it.title, it.imageId)
+                        }
                     }
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun HomeScreenRow(
+    title: String,
+    content: @Composable () -> Unit
+) {
+    Column(
+        Modifier.fillMaxWidth()
+    ) {
+        Text(
+            title.uppercase(),
+            style = MaterialTheme.typography.h2,
+            modifier = Modifier
+                .paddingFromBaseline(top = 40.dp, bottom = 8.dp)
+                .padding(start = 16.dp)
+        )
+        content()
     }
 }
 
