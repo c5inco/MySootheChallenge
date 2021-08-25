@@ -20,79 +20,50 @@ fun LoginScreen(
     var emailAddress by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
-    Box(Modifier.fillMaxSize()) {
-        Column(
-            Modifier
-                .fillMaxSize()
-                .padding(horizontal = 16.dp),
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            "Log in".uppercase(),
+            style = MaterialTheme.typography.h1,
+            modifier = Modifier.paddingFromBaseline(bottom = 32.dp)
+        )
+        TextField(
+            value = emailAddress,
+            onValueChange = { emailAddress = it },
+            placeholder = { Text("Email address") },
+            colors = TextFieldDefaults.textFieldColors(
+                backgroundColor = MaterialTheme.colors.surface
+            ),
+            singleLine = true,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(56.dp)
+        )
+        Spacer(Modifier.height(8.dp))
+        TextField(
+            value = password,
+            onValueChange = { password = it },
+            placeholder = { Text("Password") },
+            colors = TextFieldDefaults.textFieldColors(
+                backgroundColor = MaterialTheme.colors.surface
+            ),
+            singleLine = true,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(56.dp)
+        )
+        Spacer(Modifier.height(8.dp))
+        Row(
+            modifier = Modifier.paddingFromBaseline(top = 32.dp)
         ) {
-            Column(
-                Modifier.weight(1f),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                Text(
-                    "Log in".uppercase(),
-                    style = MaterialTheme.typography.h1,
-                    modifier = Modifier.paddingFromBaseline(bottom = 32.dp)
-                )
-                TextField(
-                    value = emailAddress,
-                    onValueChange = { emailAddress = it },
-                    placeholder = { Text("Email address") },
-                    colors = TextFieldDefaults.textFieldColors(
-                        backgroundColor = MaterialTheme.colors.surface
-                    ),
-                    singleLine = true,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(56.dp)
-                )
-                Spacer(Modifier.height(8.dp))
-                TextField(
-                    value = password,
-                    onValueChange = { password = it },
-                    placeholder = { Text("Password") },
-                    colors = TextFieldDefaults.textFieldColors(
-                        backgroundColor = MaterialTheme.colors.surface
-                    ),
-                    singleLine = true,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(56.dp)
-                )
-                Spacer(Modifier.height(8.dp))
-                Row(
-                    modifier = Modifier.paddingFromBaseline(top = 32.dp)
-                ) {
-                    Text(
-                        "Don't have an account? ",
-                    )
-                    Text(
-                        "Sign up",
-                        textDecoration = TextDecoration.Underline
-                    )
-                }
-            }
-            Row(
-                Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 16.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                TextButton(
-                    onClick = { onBack() },
-                    shape = MaterialTheme.shapes.medium
-                ) {
-                    Text("Back".uppercase())
-                }
-                Button(
-                    onClick = { onNext() },
-                    shape = MaterialTheme.shapes.medium
-                ) {
-                    Text("Login".uppercase())
-                }
-            }
+            Text(
+                "Don't have an account? ",
+            )
+            Text(
+                "Sign up",
+                textDecoration = TextDecoration.Underline
+            )
         }
     }
 }
@@ -102,8 +73,15 @@ fun LoginScreen(
 @Composable
 fun LoginScreenPreview() {
     MyTheme {
-        Surface(color = MaterialTheme.colors.background) {
-            LoginScreen()
+        Surface(
+            color = MaterialTheme.colors.background,
+        ) {
+            Column(
+                modifier = Modifier.padding(16.dp),
+                verticalArrangement = Arrangement.Center
+            ) {
+                LoginScreen()
+            }
         }
     }
 }

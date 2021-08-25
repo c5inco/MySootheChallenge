@@ -19,11 +19,16 @@ import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.runtime.Composable
+import androidx.compose.animation.with
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavType
 import androidx.navigation.compose.navArgument
 import com.example.androiddevchallenge.ui.theme.MyTheme
@@ -78,27 +83,62 @@ fun MyApp() {
                     SharedZAxisExitTransition()
                 },
             ) {
-                LoginScreen(
-                    onBack = { navController.popBackStack() },
-                    onNext = { navController.navigate("interests")}
-                )
-            }
-            composable(
-                "interests",
-                enterTransition = { _, _ ->
-                    SharedXAxisEnterTransition()
-                },
-                popEnterTransition = { _, _ ->
-                    SharedYAxisEnterTransition()
-                },
-                exitTransition = { _, _ ->
-                    SharedXAxisExitTransition()
+                var isLoggedIn by remember { mutableStateOf(false) }
+                Column(
+                    Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 16.dp),
+                ) {
+                    AnimatedContent(
+                        modifier = Modifier.weight(1f).fillMaxSize(),
+                        targetState = isLoggedIn,
+                        transitionSpec = {
+                            SharedXAxisEnterTransition() with SharedXAxisExitTransition()
+                        }
+                    ) {
+                        Column(
+                            verticalArrangement = Arrangement.Center
+                        ) {
+                            if (it) {
+                                InterestsScreen()
+                            } else {
+                                LoginScreen()
+                            }
+                        }
+                    }
+                    Row(
+                        Modifier
+                            .align(Alignment.End)
+                            .fillMaxWidth()
+                            .padding(bottom = 16.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        TextButton(
+                            onClick = {
+                                if (isLoggedIn) {
+                                    isLoggedIn = false
+                                } else {
+                                    navController.popBackStack()
+                                }
+                            },
+                            shape = MaterialTheme.shapes.medium
+                        ) {
+                            Text("Back".uppercase())
+                        }
+                        Button(
+                            onClick = {
+                                if (isLoggedIn) {
+                                    navController.navigate("home")
+                                } else {
+                                    isLoggedIn = true
+                                }
+                            },
+                            shape = MaterialTheme.shapes.medium
+                        ) {
+                            Text("Next".uppercase())
+                        }
+                    }
                 }
-            ) {
-                InterestsScreen(
-                    onBack = { navController.popBackStack() },
-                    onNext = { navController.navigate("home") }
-                )
             }
             composable(
                 "home",
